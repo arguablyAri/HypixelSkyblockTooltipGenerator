@@ -12,9 +12,10 @@
             </div>
         </div>
         <div id='sidebar'>
+            <br>
             <span class="title">Ari's Incredibly Simple Skyblock Tooltip Generator</span>
             <br><br>
-            <iframe title="canmyideshutupaboutneedingatitlehereyougoyouhaveitnow" style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=4122870521/size=small/bgcol=333333/linkcol=ffffff/track=156219115/transparent=true/" seamless></iframe>
+            <iframe title="canmyideshutupaboutneedingatitlehereyougoyouhaveitnow" style="border: 0; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=4122870521/size=small/bgcol=333333/linkcol=ffffff/track=156219115/transparent=true/" seamless></iframe>
             <br><br>
             <select id='rarity' onchange="changeRarity()">
                 <option value="COMMON">COMMON</option>
@@ -30,15 +31,16 @@
                 <option value="NONE">NONE</option>
             </select>
             <br>
-            <textarea id='lore' name='lore' oninput='updateLore()'></textarea>
-            <br><br>
-            <button class='iconbutton' onclick="colorsMenu()"><img src="assets/icons/coloricon.png"></button>
-            <button class='iconbutton' onclick="iconMenu(iconarray)"><img src="assets/icons/iconsandskills.png"></button>
-            <button class='iconbutton' onclick="iconMenu(mobsarray)"><img src="assets/icons/mobsicon.png"></button>
-            <button class='iconbutton' onclick="iconMenu(statsarray)"><img src="assets/icons/statsicon.png"></button>
-            <button class='iconbutton' onclick="appendText('[bold]')"><img src="assets/icons/boldicon.png"></button>
-            <button class='iconbutton' onclick="appendText('[normal]')"><img src="assets/icons/normalicon.png"></button>
-            <br><br>
+            <textarea id="lore" name="lore" oninput="updateLore()"></textarea>
+            <div class='tabs'>
+            <button class='iconbutton' onclick="colorsMenu()"><span class='buttonlabel'>Colors</span><br><img src="assets/icons/coloricon.png"></button>
+            <button class='iconbutton' onclick="iconMenu(iconarray)"><span class='buttonlabel'>Skills</span><br><img src="assets/icons/iconsandskills.png"></button>
+            <button class='iconbutton' onclick="iconMenu(mobsarray)"><span class='buttonlabel'>Mob Types</span><br><img src="assets/icons/mobsicon.png"></button>
+            <button class='iconbutton' onclick="iconMenu(statsarray)"><span class='buttonlabel'>Stats</span><br><img src="assets/icons/statsicon.png"></button>
+            <button class='iconbutton' onclick="appendText('[bold]')"><span class='buttonlabel'>Bold Tag</span><br><img src="assets/icons/boldicon.png"></button>
+            <button class='iconbutton' onclick="appendText('[italic]')"><span class='buttonlabel'>Italic Tag</span><br><img src="assets/icons/italicsicon.png"></button>
+            <button class='iconbutton' onclick="appendText('[normal]')"><span class='buttonlabel'>Normal Tag</span><br><img src="assets/icons/normalicon.png"></button>
+            </div>
             <div id='grid'>
             </div>
             <br>
@@ -52,7 +54,7 @@
             <span class='tooltiptext' style='font-size:20px; color:var(--gray)'>Special Thanks to the <a href="https://hypixelskyblock.minecraft.wiki/" target="_blank">Hypixel Skyblock Wiki</a>, who I shamelessly stole the font and plagiarized the item tooltip's CSS from.</span>
             <br>
             <span class='tooltiptext' style='font-size:18px; color:var(--darkgray)'>Not affiliated with Hypixel, Mojang, Microsoft, The Hypixel Wiki, and Toby Fox. All rights belong to their respectful owners.</span>
-            <br><br><br><br><br><br><br>
+            <br>
             <span class='man'><a href="egg.html">Well, there is a man here.</a></span>
         </div>
     </body>

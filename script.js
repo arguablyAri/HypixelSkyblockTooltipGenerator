@@ -144,8 +144,8 @@ function iconMenu(array) {
     for (let i of array) {
         let newColorButton = document.createElement("button");
         newColorButton.innerHTML = i;
-        newColorButton.setAttribute("class", "iconbutton");
-        newColorButton.setAttribute("style", "color:white; font-family:\"HypixelSkyblock\"; font-size:32px;");
+        newColorButton.setAttribute("class", "iconbutton gridbutton");
+        newColorButton.setAttribute("style", "color:white; font-family:\"HypixelSkyblock\";");
         newColorButton.setAttribute("onclick", "appendText" + "(\"" + i + "\")");
         grid.appendChild(newColorButton);
     }
