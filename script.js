@@ -1,5 +1,6 @@
 let color = "color:white;";
 let weight = "font-weight:normal;";
+let style = "font-style:normal;";
 
 const colorarray = ["darkblue", "darkgreen", "darkaqua", "darkred", "darkpurple", "gold", "gray", "darkgray", "blue", "green", "aqua", "red", "purple", "yellow", "black", "white"];
 // This is entirely unreadable. Too bad!
@@ -7,7 +8,7 @@ const iconarray =  ["", "", "", "", "✔", "✖", "", "", "
 const mobsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 const statsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "�"];
 
-const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]"];
+const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]"];
 
 function updateLore() {
     let lore = document.getElementById("lore");
@@ -19,51 +20,56 @@ function updateLore() {
     weight = "font-weight:normal;";
     
     for (let i of lorearray) {
-        let splittext = i.split(" ");
-        splittext.forEach(addText);
+        addText(i);
         tooltip.appendChild(document.createElement("br"));
     }
 }
 
 function addText(value) {
-    
     let tooltip = document.getElementById("tooltip");
-    
-    //value = checkTags(value);
-    
+
     if (substrings.some(sub => value.includes(sub))) {
         let found = substrings.find(sub => value.includes(sub));
-        let [before, after] = value.split(found);
-        let beforestr = document.createElement("span");
-        let afterstr = document.createElement("span");
+        let split = value.split(found);
+        let after = "";
         
-        beforestr.setAttribute("class", "tooltiptext");
-        beforestr.setAttribute("style", color + weight);
-        beforestr.innerHTML = before;
-        tooltip.appendChild(beforestr);
-        
+        addText(split[0]); // everything before any tags
+        for (let i in split) {
+            if (i > 0) {
+                // add up everything after any amount of possible tags
+                after += split[i];
+            }
+        }
         changeProperties(found);
-        afterstr.setAttribute("class", "tooltiptext");
-        afterstr.setAttribute("style", color + weight);
-        afterstr.innerHTML = after + " ";
-        tooltip.appendChild(afterstr);
+        addText(after);
+
     } else {
         let line = document.createElement("span");
         
         line.setAttribute("class", "tooltiptext");
-        line.setAttribute("style", color + weight);
-        line.innerHTML = value + " ";
+        line.setAttribute("style", color + weight + style);
+        line.innerHTML = value;
+
         tooltip.appendChild(line);
     }
 }
 
 function changeProperties(tag) {
     let property = tag.replace(/[\[\]]/g, "");
-    if (property == "bold" || property == "normal") {
-        weight = "font-weight:" + String(property) + ";";
-    } else {
-        color = "color:var(--" + String(property) + ");";
+    if (property == "bold") {
+        weight = "font-weight:bold;";
+        return;
     }
+    if (property == "italic") {
+        style = "font-style:italic;";
+        return;
+    }
+    if (property == "normal") {
+        weight = "font-weight:normal;";
+        style = "font-style:normal;";
+        return;
+    }
+    color = "color:var(--" + String(property) + ");";
 }
 
 function changeRarity() {
