@@ -1,0 +1,168 @@
+:root {
+    --darkblue: #353FCE;
+    --darkgreen: #00AA00;
+    --darkaqua: #00AAAA;
+    --darkred: #D13228;
+    --darkpurple: #A335EE;
+    --gold: #FF9000;
+    --gray: #A8BFD2;
+    --darkgray: #707592;
+    --blue: #459BFF;
+    --green: #55FF55;
+    --aqua: #55FFFF;
+    --red: #FF5555;
+    --purple: #FF55FF;
+    --yellow: #FFDE2F;
+    --tooltipbg: rgba(5,18,38,0.9);
+}
+
+@font-face {
+    font-family: Mojangles;
+    src: url(assets/fonts/MinecraftDefault-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Mojangles;
+    src: url(assets/fonts/MinecraftDefault-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: HypixelSkyblock;
+    src: url(assets/fonts/Hypixel-SkyBlock.woff2);
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: Mojangles, HypixelSkyblock;
+    font-size-adjust: 0.4;
+    image-rendering: pixelated;
+    display: flex;
+    margin: 0;
+}
+
+#leftside {
+    position: absolute;
+    width: 70vw;
+    height: 100vh;
+}
+
+#tooltip {
+    padding: 0.77em 1.05em 1em 1.05em;
+    width: fit-content;
+    
+    min-height: 20px;
+    transform: scale(2);
+    translate: 0 50%;
+    max-width: 100%;
+    margin: 40px auto;
+    border-image: url(assets/common_frame.png) 4 / 8px;
+    background-color: var(--tooltipbg);
+}
+
+#lore {
+    width: 550px;
+    height: 300px;
+    margin: 10px;
+    background-color: var(--tooltipbg);
+    
+    vertical-align: text-top;
+    
+    color: white;
+    font-family: Mojangles, HypixelSkyblock;
+    font-size-adjust: 0.4;
+    font-size: 24px;
+    line-height: 1.2em;
+}
+
+#sidebar {
+    position: fixed;
+    right: 0;
+    width: 30vw;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    
+    background-color: var(--tooltipbg);
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 0.125em 0.125em color-mix(in srgb, currentColor, black 80%);
+}
+
+#rarity {
+    text-align: center;
+    font-size: large;
+    color: white;
+    font-family: Mojangles;
+    font-weight: bold;
+    padding: 5px;
+    appearance: none;
+    border-color: white;
+    border-style: ridge;
+    background-color: dimgray;
+    text-shadow: 0.125em 0.125em color-mix(in srgb, currentColor, black 80%);
+}
+
+#rarity:hover {
+    border-color: var(--blue);
+    background-color: var(--darkgray);
+}
+
+.iconbutton {
+    background: none;
+    border: none;
+}
+
+.iconbutton:hover {
+    transform: scale(1.1);
+    transition: transform .25s;
+    cursor: pointer;
+}
+
+.tooltiptext {
+    font-size: 16px;
+    line-height: 1.2em;
+    text-shadow: 0.125em 0.125em color-mix(in srgb, currentColor, black 80%);
+    text-rendering: optimizeLegibility;
+}
+
+.tooltiptext a {
+    color: var(--blue);
+    transition: color .25s;
+}
+.tooltiptext a:hover {
+    color: var(--purple);
+}
+
+#grid {
+    min-height: 5%;
+    border: solid;
+    border-color: #002255;
+    font-size-adjust: 0.4;
+}
+
+.bigtext {
+    background: none;
+    color: white;
+    border: none;
+    font-family: Mojangles;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 0.125em 0.125em color-mix(in srgb, currentColor, black 80%);
+    transition: color .25s;
+}
+
+.bigtext:hover {
+    color:var(--blue);
+    cursor: pointer;
+}
+
+.man a {
+    color: var(--tooltipbg);
+    text-decoration: none;
+}
