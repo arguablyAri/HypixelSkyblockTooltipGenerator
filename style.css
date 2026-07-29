@@ -14,6 +14,8 @@
     --purple: #FF55FF;
     --yellow: #FFDE2F;
     --tooltipbg: rgba(5,18,38,0.9);
+    --white: #FFFFFF;
+    --black: #000000;
 }
 
 @font-face {
