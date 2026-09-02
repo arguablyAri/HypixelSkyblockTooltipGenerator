@@ -3,12 +3,29 @@ let weight = "font-weight:normal;";
 let style = "font-style:normal;";
 
 const colorarray = ["darkblue", "darkgreen", "darkaqua", "darkred", "darkpurple", "gold", "gray", "darkgray", "blue", "green", "aqua", "red", "purple", "yellow", "black", "white"];
-// This is entirely unreadable. Too bad!
-const iconarray =  ["", "", "", "", "✔", "✖", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-const mobsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-const statsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "�"];
+
+// defined in loadArrays();
+var iconarray = [];
+var mobsarray = [];
+var statsarray = [];
+var weatherarray = [];
+var legacyarray = [];
 
 const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]"];
+
+async function loadArrays() {
+    const response = await fetch("./icons.json");
+    const jsonData = await response.json();
+
+    iconarray = jsonData.skills.map(item => item.char) + jsonData.icons.map(item => item.char);
+    mobsarray = jsonData.mobs.map(item => item.char);
+    statsarray = jsonData.stats.map(item => item.char);
+    weatherarray = jsonData.weather.map(item => item.char);
+    legacyarray = jsonData.legacy.map(item => item.char);
+
+    colorsMenu(); // as this function is ran on load, also open up the colors menu as a freebie.
+    return { iconarray };
+}
 
 function updateLore() {
     let lore = document.getElementById("lore");
@@ -18,6 +35,7 @@ function updateLore() {
     tooltip.innerHTML = "";
     color = "color:white;";
     weight = "font-weight:normal;";
+    style = "font-style:normal;"
     
     for (let i of lorearray) {
         addText(i);
@@ -31,17 +49,15 @@ function addText(value) {
     if (substrings.some(sub => value.includes(sub))) {
         let found = substrings.find(sub => value.includes(sub));
         let split = value.split(found);
-        let after = "";
         
         addText(split[0]); // everything before any tags
         for (let i in split) {
             if (i > 0) {
                 // add up everything after any amount of possible tags
-                after += split[i];
+                changeProperties(found);
+                addText(split[i]);
             }
         }
-        changeProperties(found);
-        addText(after);
 
     } else {
         let line = document.createElement("span");
@@ -77,47 +93,47 @@ function changeRarity() {
     let tooltip = document.getElementById("tooltip");
     switch (rarity) {
         case "COMMON":
-            tooltip.style.borderImage = "url(assets/common_frame.png) 4 / 8px";
+            tooltip.style.borderImage = "url(/assets/common_frame.png) 4 / 8px";
             
             break;
         case "UNCOMMON":
-            tooltip.style.borderImage = "url(assets/uncommon_frame.png) 6 / 12px";
+            tooltip.style.borderImage = "url(/assets/uncommon_frame.png) 6 / 12px";
             
             break;
         case "RARE":
-            tooltip.style.borderImage = "url(assets/rare_frame.png) 6 / 12px";
+            tooltip.style.borderImage = "url(/assets/rare_frame.png) 6 / 12px";
             
             break;
         case "EPIC":
-            tooltip.style.borderImage = "url(assets/epic_frame.png) 8 / 16px";
+            tooltip.style.borderImage = "url(/assets/epic_frame.png) 8 / 16px";
             
             break;
         case "LEGENDARY":
-            tooltip.style.borderImage = "url(assets/legendary_frame.png) 10 / 20px";
+            tooltip.style.borderImage = "url(/assets/legendary_frame.png) 10 / 20px";
             
             break;
         case "MYTHIC":
-            tooltip.style.borderImage = "url(assets/mythic_frame.png) 10 / 20px";
+            tooltip.style.borderImage = "url(/assets/mythic_frame.png) 10 / 20px";
             
             break;
         case "DIVINE":
-            tooltip.style.borderImage = "url(assets/supreme_frame.png) 14 / 28px";
+            tooltip.style.borderImage = "url(/assets/supreme_frame.png) 14 / 28px";
             
             break;
         case "SPECIAL":
-            tooltip.style.borderImage = "url(assets/special_frame.png) 4 / 8px";
+            tooltip.style.borderImage = "url(/assets/special_frame.png) 4 / 8px";
             
             break;
         case "VERY_SPECIAL":
-            tooltip.style.borderImage = "url(assets/very_special_frame.png) 20 / 40px";
+            tooltip.style.borderImage = "url(/assets/very_special_frame.png) 20 / 40px";
             
             break;
         case "ULTIMATE":
-            tooltip.style.borderImage = "url(assets/ultimate_frame.png) 20 / 40px";
+            tooltip.style.borderImage = "url(/assets/ultimate_frame.png) 20 / 40px";
             
             break;
         case "NONE":
-            tooltip.style.borderImage = "url(assets/frame.png) 8 / 16px";
+            tooltip.style.borderImage = "url(/assets/frame.png) 8 / 16px";
             
             break;
     }
@@ -142,6 +158,10 @@ function colorsMenu() {
 function iconMenu(array) {
     clearGrid();
     for (let i of array) {
+        if (i == ",") {
+            continue // dumb. but parsing from json leads to commas somewhere along the way. this is the easiest way to get them out.
+        }
+
         let newColorButton = document.createElement("button");
         newColorButton.innerHTML = i;
         newColorButton.setAttribute("class", "iconbutton gridbutton");
@@ -153,7 +173,12 @@ function iconMenu(array) {
 
 function appendText(text) {
     let lore = document.getElementById("lore");
-    lore.value += String(text);
+
+    const originalValue = lore.value;
+    const newValue = originalValue.substring(0,lore.selectionStart) + text + originalValue.substring(lore.selectionEnd);
+
+    lore.value = newValue;
+    
     updateLore();
 }
 

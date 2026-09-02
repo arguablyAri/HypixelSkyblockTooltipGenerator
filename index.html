@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css" />
         <script src="script.js"></script>
     </head>
-    <body onload='colorsMenu()'>
+    <body onload='loadArrays()'>
         <div id='leftside'>
             <div id='tooltip'>
             </div>
@@ -37,6 +37,8 @@
             <button class='iconbutton' onclick="iconMenu(iconarray)"><span class='buttonlabel'>Skills</span><br><img src="assets/icons/iconsandskills.png"></button>
             <button class='iconbutton' onclick="iconMenu(mobsarray)"><span class='buttonlabel'>Mob Types</span><br><img src="assets/icons/mobsicon.png"></button>
             <button class='iconbutton' onclick="iconMenu(statsarray)"><span class='buttonlabel'>Stats</span><br><img src="assets/icons/statsicon.png"></button>
+            <button class='iconbutton' onclick="iconMenu(weatherarray)"><span class='buttonlabel'>Weather</span><br><img src="assets/icons/weathericon.png"></button>
+            <button class='iconbutton' onclick="iconMenu(legacyarray)"><span class='buttonlabel'>Legacy</span><br><img src="assets/icons/legacyicon.png"></button>
             <button class='iconbutton' onclick="appendText('[bold]')"><span class='buttonlabel'>Bold Tag</span><br><img src="assets/icons/boldicon.png"></button>
             <button class='iconbutton' onclick="appendText('[italic]')"><span class='buttonlabel'>Italic Tag</span><br><img src="assets/icons/italicsicon.png"></button>
             <button class='iconbutton' onclick="appendText('[normal]')"><span class='buttonlabel'>Normal Tag</span><br><img src="assets/icons/normalicon.png"></button>
@@ -54,6 +56,8 @@
             <span class='tooltiptext' style='font-size:20px; color:var(--gray)'>Special Thanks to the <a href="https://hypixelskyblock.minecraft.wiki/" target="_blank">Hypixel Skyblock Wiki</a>, who I shamelessly stole the font and plagiarized the item tooltip's CSS from.</span>
             <br>
             <span class='tooltiptext' style='font-size:18px; color:var(--darkgray)'>Not affiliated with Hypixel, Mojang, Microsoft, The Hypixel Wiki, and Toby Fox. All rights belong to their respectful owners.</span>
+            <br>
+            <span class='tooltiptext' style='font-size:24px; color:var(--gray)'><a href="https://github.com/arguablyAri/HypixelSkyblockTooltipGenerator" target="_blank">Source Code</a></span>
             <br>
             <span class='man'><a href="egg.html">Well, there is a man here.</a></span>
         </div>
