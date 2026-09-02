@@ -9,6 +9,7 @@ var iconarray = [];
 var mobsarray = [];
 var statsarray = [];
 var weatherarray = [];
+var legacyarray = [];
 
 const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]"];
 
@@ -20,6 +21,7 @@ async function loadArrays() {
     mobsarray = jsonData.mobs.map(item => item.char);
     statsarray = jsonData.stats.map(item => item.char);
     weatherarray = jsonData.weather.map(item => item.char);
+    legacyarray = jsonData.legacy.map(item => item.char);
 
     colorsMenu(); // as this function is ran on load, also open up the colors menu as a freebie.
     return { iconarray };
