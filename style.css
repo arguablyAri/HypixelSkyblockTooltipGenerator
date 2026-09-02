@@ -61,7 +61,7 @@ body {
     translate: 0 50%;
     max-width: 100%;
     margin: 40px auto;
-    border-image: url(assets/common_frame.png) 4 / 8px;
+    border-image: url(/assets/common_frame.png) 4 / 8px;
     background-color: var(--tooltipbg);
 }
 
