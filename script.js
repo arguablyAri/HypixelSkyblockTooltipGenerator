@@ -93,47 +93,47 @@ function changeRarity() {
     let tooltip = document.getElementById("tooltip");
     switch (rarity) {
         case "COMMON":
-            tooltip.style.borderImage = "url(/assets/common_frame.png) 4 / 8px";
+            tooltip.style.borderImage = "url(assets/common_frame.png) 4 / 8px";
             
             break;
         case "UNCOMMON":
-            tooltip.style.borderImage = "url(/assets/uncommon_frame.png) 6 / 12px";
+            tooltip.style.borderImage = "url(assets/uncommon_frame.png) 6 / 12px";
             
             break;
         case "RARE":
-            tooltip.style.borderImage = "url(/assets/rare_frame.png) 6 / 12px";
+            tooltip.style.borderImage = "url(assets/rare_frame.png) 6 / 12px";
             
             break;
         case "EPIC":
-            tooltip.style.borderImage = "url(/assets/epic_frame.png) 8 / 16px";
+            tooltip.style.borderImage = "url(assets/epic_frame.png) 8 / 16px";
             
             break;
         case "LEGENDARY":
-            tooltip.style.borderImage = "url(/assets/legendary_frame.png) 10 / 20px";
+            tooltip.style.borderImage = "url(assets/legendary_frame.png) 10 / 20px";
             
             break;
         case "MYTHIC":
-            tooltip.style.borderImage = "url(/assets/mythic_frame.png) 10 / 20px";
+            tooltip.style.borderImage = "url(assets/mythic_frame.png) 10 / 20px";
             
             break;
         case "DIVINE":
-            tooltip.style.borderImage = "url(/assets/supreme_frame.png) 14 / 28px";
+            tooltip.style.borderImage = "url(assets/supreme_frame.png) 14 / 28px";
             
             break;
         case "SPECIAL":
-            tooltip.style.borderImage = "url(/assets/special_frame.png) 4 / 8px";
+            tooltip.style.borderImage = "url(assets/special_frame.png) 4 / 8px";
             
             break;
         case "VERY_SPECIAL":
-            tooltip.style.borderImage = "url(/assets/very_special_frame.png) 20 / 40px";
+            tooltip.style.borderImage = "url(assets/very_special_frame.png) 20 / 40px";
             
             break;
         case "ULTIMATE":
-            tooltip.style.borderImage = "url(/assets/ultimate_frame.png) 20 / 40px";
+            tooltip.style.borderImage = "url(assets/ultimate_frame.png) 20 / 40px";
             
             break;
         case "NONE":
-            tooltip.style.borderImage = "url(/assets/frame.png) 8 / 16px";
+            tooltip.style.borderImage = "url(assets/frame.png) 8 / 16px";
             
             break;
     }
