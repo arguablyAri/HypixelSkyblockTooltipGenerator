@@ -3,12 +3,27 @@ let weight = "font-weight:normal;";
 let style = "font-style:normal;";
 
 const colorarray = ["darkblue", "darkgreen", "darkaqua", "darkred", "darkpurple", "gold", "gray", "darkgray", "blue", "green", "aqua", "red", "purple", "yellow", "black", "white"];
-// This is entirely unreadable. Too bad!
-const iconarray =  ["", "", "", "", "✔", "✖", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-const mobsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-const statsarray = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "�"];
+
+// defined in loadArrays();
+var iconarray = [];
+var mobsarray = [];
+var statsarray = [];
+var weatherarray = [];
 
 const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]"];
+
+async function loadArrays() {
+    const response = await fetch("./icons.json");
+    const jsonData = await response.json();
+
+    iconarray = jsonData.skills.map(item => item.char) + jsonData.icons.map(item => item.char);
+    mobsarray = jsonData.mobs.map(item => item.char);
+    statsarray = jsonData.stats.map(item => item.char);
+    weatherarray = jsonData.weather.map(item => item.char);
+
+    colorsMenu(); // as this function is ran on load, also open up the colors menu as a freebie.
+    return { iconarray };
+}
 
 function updateLore() {
     let lore = document.getElementById("lore");
@@ -31,17 +46,15 @@ function addText(value) {
     if (substrings.some(sub => value.includes(sub))) {
         let found = substrings.find(sub => value.includes(sub));
         let split = value.split(found);
-        let after = "";
         
         addText(split[0]); // everything before any tags
         for (let i in split) {
             if (i > 0) {
                 // add up everything after any amount of possible tags
-                after += split[i];
+                changeProperties(found);
+                addText(split[i]);
             }
         }
-        changeProperties(found);
-        addText(after);
 
     } else {
         let line = document.createElement("span");
@@ -142,6 +155,10 @@ function colorsMenu() {
 function iconMenu(array) {
     clearGrid();
     for (let i of array) {
+        if (i == ",") {
+            continue // dumb. but parsing from json leads to commas somewhere along the way. this is the easiest way to get them out.
+        }
+
         let newColorButton = document.createElement("button");
         newColorButton.innerHTML = i;
         newColorButton.setAttribute("class", "iconbutton gridbutton");
@@ -153,7 +170,12 @@ function iconMenu(array) {
 
 function appendText(text) {
     let lore = document.getElementById("lore");
-    lore.value += String(text);
+
+    const originalValue = lore.value;
+    const newValue = originalValue.substring(0,lore.selectionStart) + text + originalValue.substring(lore.selectionEnd);
+
+    lore.value = newValue;
+    
     updateLore();
 }
 
