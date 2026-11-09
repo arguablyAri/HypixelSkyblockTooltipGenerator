@@ -11,7 +11,8 @@ var statsarray = [];
 var weatherarray = [];
 var legacyarray = [];
 
-const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]"];
+const colorCodes = ["&0", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&a", "&b", "&c", "&d", "&e", "&f"];
+const substrings = ["[darkblue]", "[darkgreen]", "[darkaqua]", "[darkred]", "[darkpurple]", "[gold]", "[gray]", "[darkgray]", "[blue]", "[green]", "[aqua]", "[red]", "[purple]", "[yellow]", "[black]", "[white]", "[bold]", "[normal]", "[italic]", ...colorCodes, ...colorCodes.map(code => code.toUpperCase())];
 
 async function loadArrays() {
     const response = await fetch("./icons.json");
@@ -24,7 +25,7 @@ async function loadArrays() {
     legacyarray = jsonData.legacy.map(item => item.char);
 
     colorsMenu(); // as this function is ran on load, also open up the colors menu as a freebie.
-    return { iconarray };
+    return { };
 }
 
 function updateLore() {
@@ -71,7 +72,27 @@ function addText(value) {
 }
 
 function changeProperties(tag) {
-    let property = tag.replace(/[\[\]]/g, "");
+    let property = tag.replace(/[\[\]]/g, "").toLowerCase();
+    const minecraftColorCodes = {
+        "&0": "black",
+        "&1": "darkblue",
+        "&2": "darkgreen",
+        "&3": "darkaqua",
+        "&4": "darkred",
+        "&5": "darkpurple",
+        "&6": "gold",
+        "&7": "gray",
+        "&8": "darkgray",
+        "&9": "blue",
+        "&a": "green",
+        "&b": "aqua",
+        "&c": "red",
+        "&d": "purple",
+        "&e": "yellow",
+        "&f": "white"
+    };
+
+    property = minecraftColorCodes[property] || property;
     if (property == "bold") {
         weight = "font-weight:bold;";
         return;
@@ -175,11 +196,16 @@ function appendText(text) {
     let lore = document.getElementById("lore");
 
     const originalValue = lore.value;
-    const newValue = originalValue.substring(0,lore.selectionStart) + text + originalValue.substring(lore.selectionEnd);
+    const newValue = originalValue.substring(0,lore.selectionStart) + text + originalValue.substring(lore.selectionStart);
 
+    const cursorPosition = lore.selectionStart + text.length;
     lore.value = newValue;
     
     updateLore();
+    lore.focus();
+    lore.setSelectionRange(cursorPosition, cursorPosition);
+
+    
 }
 
 function scaleTooltip(int) {
