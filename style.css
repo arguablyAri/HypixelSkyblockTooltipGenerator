@@ -47,6 +47,7 @@ body {
 
     -webkit-font-smoothing: none;
     font-smooth: never;
+    font-variant-emoji: unicode;
 }
 
 #leftside {
@@ -56,7 +57,7 @@ body {
 }
 
 #tooltip {
-    padding: 0.65em .9em .75em 1em;
+    padding: 0.65em .9em .7em 1em;
     width: fit-content;
     
     min-height: 20px;
@@ -145,8 +146,10 @@ body {
 .tooltiptext {
     font-size: 16px;
     line-height: 1.2em;
-    text-shadow: 0.125em 0.125em color-mix(in srgb, currentColor, black 80%);
+    text-shadow: 0.1em 0.1em color-mix(in srgb, currentColor, black 75%);
     text-rendering: optimizeLegibility;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
 }
 
 .tooltiptext a {
